@@ -1,0 +1,35 @@
+# Cada lunes regenera radares.json desde la DGT y OpenStreetMap y lo publica si ha cambiado.
+# La app DRuta lo baja de https://raw.githubusercontent.com/mirlogames26-create/druta-radares/main/radares.json
+name: Actualizar radares
+on:
+  schedule:
+    - cron: "0 5 * * 1"      # lunes, 05:00 UTC
+  workflow_dispatch: {}      # y a mano desde la pestana Actions
+permissions:
+  contents: write
+jobs:
+  radares:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bajar DGT y OpenStreetMap
+        run: python scripts/bajar.py
+      - name: Leer el inventario de la DGT
+        run: python scripts/leer_dgt.py datos/radares_dgt.xml
+      - name: Unir las fuentes
+        run: python scripts/unir_radares.py
+      - name: Publicar si ha cambiado
+        run: |
+          if git diff --quiet -- radares.json; then
+            echo "Sin cambios en los radares"
+          else
+            git config user.name "druta-radares"
+            git config user.email "druta-radares@users.noreply.github.com"
+            git add radares.json meta.json
+            git commit -m "Radares $(date -u +%F): $(python -c 'import json;print(json.load(open("meta.json"))["radares"])')"
+            git push
+          fi
