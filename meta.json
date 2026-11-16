@@ -1,11 +1,11 @@
 {
- "fecha": "2026-11-14",
- "radares": 3394,
+ "fecha": "2026-11-16",
+ "radares": 3398,
  "por_tipo": {
   "tramo_fin": 215,
   "fijo": 2779,
   "tramo_inicio": 221,
-  "semaforo": 179
+  "semaforo": 183
  },
  "fuentes": [
   "DGT, inventario de radares (NAP, CC BY 4.0)",
