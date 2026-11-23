@@ -1,14 +1,15 @@
 {
- "fecha": "2026-11-16",
- "radares": 3398,
+ "fecha": "2026-11-23",
+ "radares": 3627,
  "por_tipo": {
   "tramo_fin": 215,
-  "fijo": 2779,
+  "fijo": 2966,
   "tramo_inicio": 221,
-  "semaforo": 183
+  "semaforo": 225
  },
  "fuentes": [
   "DGT, inventario de radares (NAP, CC BY 4.0)",
-  "© colaboradores de OpenStreetMap (ODbL)"
+  "© colaboradores de OpenStreetMap (ODbL)",
+  "avisos de usuarios de dRuta, comprobados"
  ]
 }
